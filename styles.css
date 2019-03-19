@@ -1,0 +1,254 @@
+
+.headingBackground {
+    background-color: #D4D4D4;
+    width: 100%;
+    height: 80px;
+    margin: 0px;
+}
+
+.headingLine {
+    background-color: #3B3F52;
+    width: 100%;
+    height: 4px;
+}
+
+.headingTitle1 {
+    color: #3B3F52;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 50%;
+}
+
+.headingTitle2 {
+    color: #E15759;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 50%;
+}
+
+.dashboardBackground {
+    background-color: #F5F5F5;
+    height: 100%;
+    width: 100%;
+}
+
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.infoBox {
+    background-color: white;
+    padding: 5px;
+    width: 23%;
+    height: 125px;
+    margin-top: 10px;
+    border: 1px solid #D4D4D4;
+    text-align: center;
+}
+
+.noticeMessage {
+    color: rgb(175, 175, 175);
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.graphBox {
+    position: relative;
+    background-color: white;
+    width: 32%;
+    height: 400px;
+    margin-top: 10px;
+    border: 1px solid #D4D4D4;
+}
+
+/* --------------------------------------------------------------- */
+
+.tileHeading {
+    position: absolute;
+    background-color: #E6E6E6;
+    height: 30px;
+    width: 100%;
+}
+
+.tileHeadingText {
+    color: #3B3F52;
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 15px;
+    padding-top: 3px;
+}
+
+.filterTile {
+    position: relative;
+    width: calc(100% - 18px);
+    height: 100px;
+    border: 1px solid #D4D4D4;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 15px;
+}
+
+/* --------------------------------------------------------------- */
+
+.selectText {
+    color: #19B4AC;
+    font-size: 20px;
+    font-weight: 625;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.valueText {
+    color: rgb(44, 47, 61);
+    font-size: 60px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.littleValueText {
+    color: rgb(44, 47, 61);
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 8px;
+}
+
+.centerSelect {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.centerValue {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.icon {
+    color: #19B4AC;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+
+/* --------------------------------------------------------------- */
+
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.filter {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    right: 0;
+}
+
+.filterBox {
+    position: relative;
+    width: 32%;
+    height: 30px;
+    margin-top: 8px;
+	text-align: center;
+}
+
+.dropdownTitle {
+    float:left;
+    height: 100%;
+    width: 100px;
+    background-color: #3B3F52;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.titleAlign {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top: 8px;
+    color: white;
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+.dropdown {
+    position: absolute;
+    width: calc(100% - 81px);
+    height: 30px;
+	right: 0px;
+}
+
+/* --------------------------------------------------------------- */
+
+
+/* Create three equal columns that floats next to each other */
+.columnScatterChart {
+	float: left;
+	/* width: 32.1%; */
+	width: 610px;
+	border-style: groove;	  
+	border-width: thin;
+	margin: 10px;
+	background-color: #FFFFFF;
+}
+
+.columnBarChart {
+	float: left;
+	width: 600px;
+	border-style: groove;
+	border-width: thin;
+	margin: 10px;
+	background-color: #FFFFFF;
+}
+
+.columnGraphWide {
+	float: left;
+	width: 1240px;
+	padding: 0px; 
+	border-style: groove;
+	border-width: thin;
+	margin: 10px;
+	background-color: #FFFFFF;
+}
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+	background-color: #FFFFFF;
+}
+
+.rowTopColumn:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.filterDropDownColumn {
+	width: 100%;
+	float: left;
+	text-align: center;
+	height: 20px;
+}
+

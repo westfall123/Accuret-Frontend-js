@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:h="http://java.sun.com/jsf/html"
+			xmlns:f="http://java.sun.com/jsf/core"
+			xmlns:p="http://primefaces.org/ui">
+
+	<head>
+			<meta charset="utf-8">
+		<!-- <link rel="stylesheet" href="ej.web.all.min.css"/>c -->
+		<link rel="stylesheet" href="styles.css"> 
+			<!-- including ECharts file -->
+			<script src="echarts.min.js"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+			<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+			<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+		
+		<!-- style sheet for default theme(flat azure) -->
+	
+		<link href="http://cdn.syncfusion.com/17.1.0.32/js/web/flat-azure/ej.web.all.min.css"
+				rel="stylesheet" />
+	
+		<!--scripts-->
+		
+		<style>
+			.e-dlla {
+				width: 500px;
+			}
+		</style>
+	
+		<script src="http://cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js"></script>
+	
+		<script src="http://cdn.syncfusion.com/js/assets/external/jquery.easing.1.3.min.js"></script>
+	
+		<script src="http://cdn.syncfusion.com/17.1.0.32/js/web/ej.web.all.min.js"></script>
+		
+	</head>
+
+	<body>
+		<script>
+
+			// Place your script code here to initialize DropDownList
+
+		</script>
+
+
+
+		<div class="headingBackground">
+			<div class="headingLine"></div>
+			<p style="margin-left: 25px; margin-top: 10px;">
+				<span class="headingTitle1">Accu</span>
+				<span class="headingTitle2">ret</span>
+				<span class="headingTitle1"> Dashboard</span>
+			</p>
+		</div>
+
+		<div class="dashboardBackground">
+			<ul class="flex-container">
+				<li class="infoBox">
+					<div class="centerSelect">
+						<span class="selectText">AVAILABILITY</span>
+					</div><br/>
+					<div class="centerValue">
+						<span class="valueText">90.5%</span>
+						<span class="littleValueText">(
+							<span style="color: #E35759">-9%</span>
+							)
+						</span>
+					</div>
+				</li>
+				<li class="infoBox">
+					<div class="centerSelect">
+						<span class="selectText">REPORTED AVAILABILITY</span>
+					</div><br/>
+					<div class="centerValue">
+						<span class="valueText">95%</span>
+						<span class="littleValueText">()</span>
+					</div>
+				</li>
+
+				<li class="infoBox">
+					<div class="centerSelect">
+						<span class="selectText">LOST SALES</span>
+					</div><br/>
+					<div class="centerValue">
+						<span class="valueText">$35.1K</span>
+						<span class="littleValueText">(1%)</span>
+					</div>
+				</li>
+
+				<li class="infoBox">
+					<div class="centerSelect">
+						<span class="selectText">DATA ACCURACY</span>
+					</div><br/>
+					<div class="centerValue">
+						<span class="valueText">27.9%</span>
+						<span class="littleValueText">()</span>
+					</div>
+				</li>
+			</ul>
+		
+			<div class="filterTile">
+				<div class="tileHeading">
+					<div class="tileHeadingText">Filter</div>
+				</div>
+
+				<ul class="flex-container" style="margin-top: 40px;">
+					<li class="filterBox">
+						<div class="dropdownTitle">
+							<div class="titleAlign">Store</div>
+						</div>
+						<div class="dropdown">
+							<div class="filterDropDownColumn" style="width: 100%">
+								<span id="dropdown1_wrapper" class="e-ddl e-widget" tabindex="0" style="width: 100%;">
+									<select id="dropdown1">
+										<option value="item1">ListItem 1</option>
+										<option value="item2">ListItem 2</option>
+										<option value="item3">ListItem 3</option>
+										<option value="item4">ListItem 4</option>
+										<option value="item5">ListItem 5</option>
+									</select>
+								</span>
+							</div>
+
+							<script>
+								$(function() {
+									var items = [{
+										text: "ListItem 1",
+										value: "item1"
+									}, {
+										text: "ListItem 2",
+										value: "item2"
+									}, {
+										text: "ListItem 3",
+										value: "item3"
+									}, {
+										text: "ListItem 4",
+										value: "item4"
+									}, {
+										text: "ListItem 5",
+										value: "item5"
+									}];
+									$('#dropdown1').ejDropDownList({
+										dataSource: items,
+										fields: {
+											text: "text",
+											value: "value"
+										},
+										showCheckbox: true,
+										width: 550
+									});
+								});
+							</script>
+						</div>
+					</li>
+					<li class="filterBox">
+						<div class="dropdownTitle">
+							<div class="titleAlign">SKU</div>
+						</div>
+						<div class="dropdown">
+							<div class="filterDropDownColumn">
+								<select id="dropdown2">
+									<option value="item1">ListItem 1</option>
+									<option value="item2">ListItem 2</option>
+									<option value="item3">ListItem 3</option>
+									<option value="item4">ListItem 4</option>
+									<option value="item5">ListItem 5</option>
+								</select>
+							</div>
+
+							<script>
+								$(function() {
+									var items = [{
+										text: "ListItem 1",
+										value: "item1"
+									}, {
+										text: "ListItem 2",
+										value: "item2"
+									}, {
+										text: "ListItem 3",
+										value: "item3"
+									}, {
+										text: "ListItem 4",
+										value: "item4"
+									}, {
+										text: "ListItem 5",
+										value: "item5"
+									}];
+									$('#dropdown2').ejDropDownList({
+										dataSource: items,
+										fields: {
+											text: "text",
+											value: "value"
+										},
+										showCheckbox: true,
+										width: 550
+									});
+								});
+							</script>
+						</div>
+					</li>
+					<li class="filterBox">
+						<div class="dropdownTitle">
+							<div class="titleAlign">Time</div>
+						</div>
+						<div class="dropdown">
+							<div class="filterDropDownColumn">
+								<select id="dropdown3">
+									<option value="item1">ListItem 1</option>
+									<option value="item2">ListItem 2</option>
+									<option value="item3">ListItem 3</option>
+									<option value="item4">ListItem 4</option>
+									<option value="item5">ListItem 5</option>
+								</select>
+							</div>
+
+							<script>
+								$(function() {
+									var items = [{
+										text: "ListItem 1",
+										value: "item1"
+									}, {
+										text: "ListItem 2",
+										value: "item2"
+									}, {
+										text: "ListItem 3",
+										value: "item3"
+									}, {
+										text: "ListItem 4",
+										value: "item4"
+									}, {
+										text: "ListItem 5",
+										value: "item5"
+									}];
+									$('#dropdown3').ejDropDownList({
+										dataSource: items,
+										fields: {
+											text: "text",
+											value: "value"
+										},
+										showCheckbox: true,
+										width: 200
+									});
+								});
+							</script>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="noticeMessage">
+				All values are one year rolling averages. % change compared to rolling horizon ending last period.
+			</div>
+		
+			<ul class="flex-container">
+				<li class="graphBox">
+					<div class="tileHeading">
+						<div class="tileHeadingText">Lost Sales by SKU</div>
+					</div>
+					<div id="salesSku" style="width: 100%;height:100%;">
+								<script type="text/javascript">
+									// based on prepared DOM, initialize echarts instance
+									var myChart = echarts.init(document.getElementById('salesSku'));
+
+									// specify chart configuration item and data
+									var option = {
+										color: ['#131955',
+										'#3c4072',
+										'#222a82',
+										'#2e4064',
+										'#092764',
+										'#193163'],
+										
+										tooltip: {
+											trigger: 'item',
+											formatter: '{a} <br/>{b}: {c}'
+										},
+										xAxis: {
+											type: 'value',
+											name: 'Total Lost Sales',
+											nameLocation: 'middle',
+											nameGap: 35,
+											nameTextStyle: {
+											fontWeight: 'bold'
+											}
+										},
+										yAxis: {
+											type: 'category',
+											data: ['5', '3', '7', '8', '9', '4', '2', '6', '10', '1', '5', '3', '7', '8', '9', '4', '2', '6', '10', '1', '5', '3', '7', '8', '9', '4', '2', '6', '10', '1'],
+											name: 'SKU ID',
+											nameLocation: 'end',
+											nameGap: 5,
+											nameTextStyle: {
+												fontWeight: 'bold'
+											}
+										},
+										series: [{
+											name: 'Lost Sales By SKU',
+											data: [800, 900, 1000, 1700, 1850, 2500, 4950, 5400, 5800, 11000, 800, 900, 1000, 1700, 1850, 2500, 4950, 5400, 5800, 11000, 800, 900, 1000, 1700, 1850, 2500, 4950, 5400, 5800, 11000],
+											type: 'bar'
+										}]
+									};
+
+									// use configuration item and data specified to show chart
+									myChart.setOption(option);
+								</script>
+							</div>
+				</li>
+				<li class="graphBox" style="width: 65.4%">
+					<div class="tileHeading">
+						<div class="tileHeadingText">Total Lost Sales Over Time</div>
+					</div>
+					<div id="lostSales" style="width: 100%;height:100%;">
+						<script type="text/javascript">
+							// based on prepared DOM, initialize echarts instance
+							var myChart = echarts.init(document.getElementById('lostSales'));
+
+							// specify chart configuration item and data
+							var option = {
+									color: ['#131955',
+									'#3c4072',
+									'#222a82',
+									'#2e4064',
+									'#092764',
+									'#193163'],
+									tooltip: {
+										trigger: 'item',
+										formatter: '{a} <br/>{b}: {c}'
+									},
+									xAxis: {
+										type: 'category',
+										boundaryGap: false,
+										data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+										name: 'Day of Date [2017]',
+										nameLocation: 'middle',
+										nameGap: 35,
+										nameTextStyle: {
+										fontWeight: 'bold'
+										}
+									},
+									yAxis: {
+										type: 'value',
+										name: 'Total Lost Sales',
+										nameLocation: 'middle',
+										nameGap: 43,
+										nameTextStyle: {
+										fontWeight: 'bold'
+										}
+									},
+									series: [{
+										name: 'Total Lost Sales',
+										data: [820, 932, 607, 1300, 1290, 1330, 1320],
+										type: 'line',
+										areaStyle: {}
+									}]
+									};
+
+							// use configuration item and data specified to show chart
+							myChart.setOption(option);
+						</script>
+					</div>
+				</li>
+			</ul>
+
+			<ul class="flex-container" style="margin-top: 5px;">
+				<li class="graphBox">
+					<div class="tileHeading">
+						<div class="tileHeadingText">Lost Sales By Store</div>
+					</div>
+					<div id="salesStore" style="width: 100%;height:100%;">
+						<script type="text/javascript">
+							// based on prepared DOM, initialize echarts instance
+							var myChart = echarts.init(document.getElementById('salesStore'));
+
+							// specify chart configuration item and data
+							var option = {
+								color: ['#131955',
+								'#3c4072',
+								'#222a82',
+								'#2e4064',
+								'#092764',
+								'#193163'],
+								tooltip: {
+									trigger: 'item',
+									formatter: '{a} <br/>{b}: {c}'
+								},
+								xAxis: {
+									type: 'value',
+									name: 'Total Lost Sales',
+									nameLocation: 'middle',
+									nameGap: 35,
+									nameTextStyle: {
+									fontWeight: 'bold'
+									}
+								},
+								yAxis: {
+									type: 'category',
+									data: ['37', '27', '26', '88', '65', '89', '51', '94', '58'],
+									name: 'Store ID',
+									nameLocation: 'end',
+									nameGap: 5,
+									nameTextStyle: {
+										fontWeight: 'bold'
+									}
+								},
+								series: [{
+									data: [440, 450, 470, 480, 490, 500, 510, 515, 590],
+									type: 'bar'
+									},
+									{
+									data: [230, 567, 100, 230, 230, 230, 230, 230, 230],
+									type: 'bar',
+									barWidth: '60%',
+									barGap:'-100'
+									}
+								]
+								};
+
+							// use configuration item and data specified to show chart
+							myChart.setOption(option);
+						</script>
+					</div>
+				</li>
+				<li class="graphBox">
+					<div class="tileHeading">
+						<div class="tileHeadingText">Lost sales% vs lost sales units</div>
+					</div>
+					<div id="lostSales%" style="width: 100%;height:100%;">
+						<script type="text/javascript">
+							// based on prepared DOM, initialize echarts instance
+							myChart = echarts.init(document.getElementById('lostSales%'));
+
+							// specify chart configuration item and data
+							option = {
+									color: ['#131955',
+									'#3c4072',
+									'#222a82',
+									'#2e4064',
+									'#092764',
+									'#193163'
+								],
+								tooltip: {
+									trigger: 'item',
+									formatter: '{a} <br/>{b}: {c}'
+								},
+								xAxis: {
+									name: 'Lost Sales Units',
+									nameLocation: 'middle',
+									nameGap: 35,
+									nameTextStyle: {
+									fontWeight: 'bold'
+									}
+								},
+								yAxis: {
+									name: 'Lost Sales %',
+									nameLocation: 'middle',
+									nameGap: 25,
+									nameTextStyle: {
+									fontWeight: 'bold'
+									},
+								},
+								series: [{
+									name: 'Lost Sales % vs Unit',
+									data: [
+									[10.0, 8.04],
+									[8.0, 6.95],
+									[13.0, 7.58],
+									[9.0, 8.81],
+									[11.0, 8.33],
+									[14.0, 9.96],
+									[6.0, 7.24],
+									[4.0, 4.26],
+									[12.0, 10.84],
+									[7.0, 4.82],
+									[5.0, 5.68]
+									],
+									type: 'scatter'
+								}]
+							};
+
+							// use configuration item and data specified to show chart
+							myChart.setOption(option);
+							
+								$(window).on('resize', function(){
+									if(myChart != null && myChart != undefined){
+										myChart.resize();
+									}
+								});
+						</script>
+					</div>
+				</li>
+				<li class="graphBox">
+					<div class="tileHeading">
+						<div class="tileHeadingText">Transitions to OOS</div>
+					</div>
+					<div id="OOS" style="width: 100%;height:100%;">
+						<script type="text/javascript">
+							// based on prepared DOM, initialize echarts instance
+							var myChart = echarts.init(document.getElementById('OOS'));
+
+							// specify chart configuration item and data
+							option = {
+									color: ['#131955',
+									'#3c4072',
+									'#222a82',
+									'#2e4064',
+									'#092764',
+									'#193163'
+								],
+								tooltip: {
+									trigger: 'item',
+									formatter: '{a} <br/>{b}: {c}'
+								},
+								xAxis: {
+									name: 'Lost Sales Units',
+									nameLocation: 'middle',
+									nameGap: 35,
+									nameTextStyle: {
+									fontWeight: 'bold'
+									}
+								},
+								yAxis: {
+									name: 'Lost Sales %',
+									nameLocation: 'middle',
+									nameGap: 25,
+									nameTextStyle: {
+									fontWeight: 'bold'
+									},
+								},
+								series: [{
+									name: 'Lost Sales % vs Unit',
+									data: [
+									[10.0, 8.04],
+									[8.0, 6.95],
+									[13.0, 7.58],
+									[9.0, 8.81],
+									[11.0, 8.33],
+									[14.0, 9.96],
+									[6.0, 7.24],
+									[4.0, 4.26],
+									[12.0, 10.84],
+									[7.0, 4.82],
+									[5.0, 5.68]
+									],
+									type: 'scatter'
+								}]
+								};
+
+							// use configuration item and data specified to show chart
+							myChart.setOption(option);
+						</script>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
