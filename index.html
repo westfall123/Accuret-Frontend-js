@@ -49,13 +49,22 @@
 		}
 		
 		function resizeFilters(width) {
-			$('#dropdown1').ejDropDownList({
+			$('#dropdown1_1').ejDropDownList({
 				width: width
 			});
-			$('#dropdown2').ejDropDownList({
+			$('#dropdown2_1').ejDropDownList({
 				width: width
 			});
-			$('#dropdown3').ejDropDownList({
+			$('#dropdown3_1').ejDropDownList({
+				width: width
+			});
+			$('#dropdown1_2').ejDropDownList({
+				width: width
+			});
+			$('#dropdown2_2').ejDropDownList({
+				width: width
+			});
+			$('#dropdown3_2').ejDropDownList({
 				width: width
 			});
 		}
@@ -78,7 +87,7 @@
 					text: "ListItem 5",
 					value: "item5"
 				}];
-				$('#dropdown1').ejDropDownList({
+				$('#dropdown1_1').ejDropDownList({
 					dataSource: items,
 					fields: {
 						text: "text",
@@ -104,7 +113,7 @@
 					text: "ListItem 5",
 					value: "item5"
 				}];
-				$('#dropdown2').ejDropDownList({
+				$('#dropdown2_1').ejDropDownList({
 					dataSource: items,
 					fields: {
 						text: "text",
@@ -130,7 +139,85 @@
 					text: "ListItem 5",
 					value: "item5"
 				}];
-				$('#dropdown3').ejDropDownList({
+				$('#dropdown3_1').ejDropDownList({
+					dataSource: items,
+					fields: {
+						text: "text",
+						value: "value"
+					},
+					showCheckbox: true,
+					width: width
+				});
+				
+				var items = [{
+					text: "ListItem 1",
+					value: "item1"
+				}, {
+					text: "ListItem 2",
+					value: "item2"
+				}, {
+					text: "ListItem 3",
+					value: "item3"
+				}, {
+					text: "ListItem 4",
+					value: "item4"
+				}, {
+					text: "ListItem 5",
+					value: "item5"
+				}];
+				$('#dropdown1_2').ejDropDownList({
+					dataSource: items,
+					fields: {
+						text: "text",
+						value: "value"
+					},
+					showCheckbox: true,
+					width: width
+				});
+			
+				var items = [{
+					text: "ListItem 1",
+					value: "item1"
+				}, {
+					text: "ListItem 2",
+					value: "item2"
+				}, {
+					text: "ListItem 3",
+					value: "item3"
+				}, {
+					text: "ListItem 4",
+					value: "item4"
+				}, {
+					text: "ListItem 5",
+					value: "item5"
+				}];
+				$('#dropdown2_2').ejDropDownList({
+					dataSource: items,
+					fields: {
+						text: "text",
+						value: "value"
+					},
+					showCheckbox: true,
+					width: width
+				});
+				
+				var items = [{
+					text: "ListItem 1",
+					value: "item1"
+				}, {
+					text: "ListItem 2",
+					value: "item2"
+				}, {
+					text: "ListItem 3",
+					value: "item3"
+				}, {
+					text: "ListItem 4",
+					value: "item4"
+				}, {
+					text: "ListItem 5",
+					value: "item5"
+				}];
+				$('#dropdown3_2').ejDropDownList({
 					dataSource: items,
 					fields: {
 						text: "text",
@@ -154,8 +241,7 @@
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					this.responseText;
-					
+					alert(this.responseText);
 				}
 			};
 			xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
@@ -248,7 +334,9 @@
 					<div class="tileHeadingText">Filter</div>
 				</div>
 
-				<ul class="flex-container" style="margin-top: 40px;">
+				<div class="tileHeadingText" style="margin-top: 40px">Main Filter</div>
+				
+				<ul class="flex-container" style="margin-top: 0px;">
 					<li class="filterBox">
 						<div class="dropdownTitle">
 							<div class="titleAlign">Store</div>
@@ -256,7 +344,7 @@
 						<div class="dropdown">
 							<div id="dropdown1Parent" class="filterDropDownColumn" style="width: 100%">
 								<span id="dropdown1_wrapper" class="e-ddl e-widget" tabindex="0" style="width: 100%;">
-									<select id="dropdown1">
+									<select id="dropdown1_1">
 										<option value="item1">ListItem 1</option>
 										<option value="item2">ListItem 2</option>
 										<option value="item3">ListItem 3</option>
@@ -273,7 +361,7 @@
 						</div>
 						<div class="dropdown">
 							<div id="dropdown2Parent" class="filterDropDownColumn">
-								<select id="dropdown2">
+								<select id="dropdown2_1">
 									<option value="item1">ListItem 1</option>
 									<option value="item2">ListItem 2</option>
 									<option value="item3">ListItem 3</option>
@@ -289,7 +377,62 @@
 						</div>
 						<div id="dropdown3Parent" class="dropdown">
 							<div id="dropdown3Parent" class="filterDropDownColumn">
-								<select id="dropdown3">
+								<select id="dropdown3_1">
+									<option value="item1">ListItem 1</option>
+									<option value="item2">ListItem 2</option>
+									<option value="item3">ListItem 3</option>
+									<option value="item4">ListItem 4</option>
+									<option value="item5">ListItem 5</option>
+								</select>
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="tileHeadingText">Alternate Filter</div>
+				
+				<ul class="flex-container" style="margin-top: 0px;">
+					<li class="filterBox">
+						<div class="dropdownTitle">
+							<div class="titleAlign">Store</div>
+						</div>
+						<div class="dropdown">
+							<div id="dropdown1Parent" class="filterDropDownColumn" style="width: 100%">
+								<span id="dropdown1_wrapper" class="e-ddl e-widget" tabindex="0" style="width: 100%;">
+									<select id="dropdown1_2">
+										<option value="item1">ListItem 1</option>
+										<option value="item2">ListItem 2</option>
+										<option value="item3">ListItem 3</option>
+										<option value="item4">ListItem 4</option>
+										<option value="item5">ListItem 5</option>
+									</select>
+								</span>
+							</div>
+						</div>
+					</li>
+					<li class="filterBox">
+						<div class="dropdownTitle">
+							<div class="titleAlign">SKU</div>
+						</div>
+						<div class="dropdown">
+							<div id="dropdown2Parent" class="filterDropDownColumn">
+								<select id="dropdown2_2">
+									<option value="item1">ListItem 1</option>
+									<option value="item2">ListItem 2</option>
+									<option value="item3">ListItem 3</option>
+									<option value="item4">ListItem 4</option>
+									<option value="item5">ListItem 5</option>
+								</select>
+							</div>
+						</div>
+					</li>
+					<li class="filterBox">
+						<div class="dropdownTitle">
+							<div class="titleAlign">Time</div>
+						</div>
+						<div id="dropdown3Parent" class="dropdown">
+							<div id="dropdown3Parent" class="filterDropDownColumn">
+								<select id="dropdown3_2">
 									<option value="item1">ListItem 1</option>
 									<option value="item2">ListItem 2</option>
 									<option value="item3">ListItem 3</option>
