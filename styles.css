@@ -177,7 +177,7 @@
 .dropdownTitle {
     float:left;
     height: 100%;
-    width: 100px;
+    width: 85px;
     background-color: #3B3F52;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -187,7 +187,7 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding-top: 8px;
     color: white;
-    margin-right: 20px;
+    text-align: center;
     font-size: 12px;
 }
 

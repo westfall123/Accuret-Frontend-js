@@ -22,24 +22,28 @@
 
 	<body>
 		<script>
-		var globalFilterWidth = 450;
+		var globalFilterWidth;
 		var chart1, chart2, chart3, chart4, chart5;
 		
-		<!-- Call this initally to create out filters -->
-		createFilters(globalFilterWidth);
+		$(window).load(function() {
+			<!-- Call this initally to create out filters -->
+			globalFilterWidth = $(".filterDropDownColumn").width();
+			createFilters(globalFilterWidth);
+		});
 		
 		$(window).resize(function() { 
 			handleSizing();
 		});
 		
 		function handleSizing() {
-			var browserZoomLevel = Math.round(window.devicePixelRatio * 100);
-			console.log(browserZoomLevel); 
-			var width = globalFilterWidth / (browserZoomLevel/100);
-			console.log(width);
+			<!-- var browserZoomLevel = Math.round(window.devicePixelRatio * 100); -->
+			<!-- console.log(browserZoomLevel);  -->
+			<!-- var width = globalFilterWidth / (browserZoomLevel/100); -->
+			<!-- console.log(width); -->
 
 			<!-- Recalc Filter sizes -->
-			resizeFilters(width);
+			globalFilterWidth = $(".filterDropDownColumn").width();
+			resizeFilters(globalFilterWidth);
 			resizeCharts();
 		}
 		
@@ -249,7 +253,7 @@
 							<div class="titleAlign">Store</div>
 						</div>
 						<div class="dropdown">
-							<div class="filterDropDownColumn" style="width: 100%">
+							<div id="dropdown1Parent" class="filterDropDownColumn" style="width: 100%">
 								<span id="dropdown1_wrapper" class="e-ddl e-widget" tabindex="0" style="width: 100%;">
 									<select id="dropdown1">
 										<option value="item1">ListItem 1</option>
@@ -267,7 +271,7 @@
 							<div class="titleAlign">SKU</div>
 						</div>
 						<div class="dropdown">
-							<div class="filterDropDownColumn">
+							<div id="dropdown2Parent" class="filterDropDownColumn">
 								<select id="dropdown2">
 									<option value="item1">ListItem 1</option>
 									<option value="item2">ListItem 2</option>
@@ -282,8 +286,8 @@
 						<div class="dropdownTitle">
 							<div class="titleAlign">Time</div>
 						</div>
-						<div class="dropdown">
-							<div class="filterDropDownColumn">
+						<div id="dropdown3Parent" class="dropdown">
+							<div id="dropdown3Parent" class="filterDropDownColumn">
 								<select id="dropdown3">
 									<option value="item1">ListItem 1</option>
 									<option value="item2">ListItem 2</option>
