@@ -145,8 +145,44 @@
 			chart4.resize();
 			chart5.resize();
 		}
-
+		
+		function loadDashboardData() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				<!-- check response code to see if we were successful -->
+				if (this.readyState == 4 && this.status == 200) {
+					<!-- this is the JSON being sent back -->
+					this.responseText;
+					
+				}
+			};
+			xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+			xhttp.send();
+		}
+		
+		function postData() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				<!-- check response code to see if we were successful -->
+				if (this.readyState == 4 && this.status == 200) {
+					this.responseText;
+					
+				}
+			};
+			xhttp.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+			xhttp.send();
+		}
 		</script>
+		
+		<div id="d1">
+			<h1>The XMLHttpRequest Object</h1>
+			<button type="button" onclick="loadDashboardData()">Change Content</button>
+		</div>
+		
+		<div id="d2">
+			<h1>The XMLHttpRequest Object</h1>
+			<button type="button" onclick="postData()">Change Content</button>
+		</div>
 
 		<div class="headingBackground">
 			<div class="headingLine"></div>
