@@ -87,7 +87,13 @@
 						value: "value"
 					},
 					showCheckbox: true,
-					width: width
+					width: width,
+					change: function (args) 
+					{
+						var obj = $('#dropdown1_1').data("ejDropDownList");
+						console.log("Selected Item's Text - " + obj.option("text"));
+						console.log("selected Item's Value - " + obj.option("value"));                 
+					}
 				});
 			
 				var items = [{
@@ -113,7 +119,13 @@
 						value: "value"
 					},
 					showCheckbox: true,
-					width: width
+					width: width,
+					change: function (args) 
+					{
+						var obj = $('#dropdown2_1').data("ejDropDownList");
+						console.log("Selected Item's Text - " + obj.option("text"));
+						console.log("selected Item's Value - " + obj.option("value"));                 
+					}
 				});
 				
 				var items = [{
@@ -139,7 +151,13 @@
 						value: "value"
 					},
 					showCheckbox: true,
-					width: width
+					width: width,
+					change: function (args) 
+					{
+						var obj = $('#dropdown3_1').data("ejDropDownList");
+						console.log("Selected Item's Text - " + obj.option("text"));
+						console.log("selected Item's Value - " + obj.option("value"));                 
+					}
 				});
 				
 				var items = [{
@@ -166,8 +184,12 @@
 					},
 					showCheckbox: true,
 					width: width,
-					select: function (args) {
-						console.log('received click');
+					change: function (args) 
+					{
+					    console.log('received click');
+						var obj = $('#dropdown1_2').data("ejDropDownList");
+						console.log("Selected Item's Text - " + obj.option("text"));
+						console.log("selected Item's Value - " + obj.option("value"));                 
 					}
 				});
 			
@@ -195,8 +217,12 @@
 					},
 					showCheckbox: true,
 					width: width,
-					select: function (args) {
-						console.log('received click');
+					change: function (args) 
+					{
+					    console.log('received click');
+						var obj = $('#dropdown2_2').data("ejDropDownList");
+						console.log("Selected Item's Text - " + obj.option("text"));
+						console.log("selected Item's Value - " + obj.option("value"));                 
 					}
 				});
 				
@@ -224,8 +250,11 @@
 					},
 					showCheckbox: true,
 					width: width,
-					select: function (args) {
-						console.log('received click');
+					change: function (args) 
+					{
+						var obj = $('#dropdown3_2').data("ejDropDownList");
+						console.log("Selected Item's Text - " + obj.option("text"));
+						console.log("selected Item's Value - " + obj.option("value"));                 
 					}
 				});
 			});
