@@ -281,15 +281,27 @@
 		}
 		
 		function postData() {
-			var xhttp = new XMLHttpRequest();
+			var xhttp = new xmlhttprequest();
 			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					this.responseText;
+				if (this.readystate == 4 && this.status == 200) {
+					this.responsetext;
 					
 				}
 			};
-			xhttp.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+			xhttp.open("post", "https://jsonplaceholder.typicode.com/posts", true);
 			xhttp.send();
+		}
+		
+		var filterHidden = false;
+		function toggleHideFitler2() {
+			if(filterHidden == false) {
+				$("#box1test").hide();
+				filterHidden = !filterHidden;
+			}
+			else {
+				$("#box1test").show();
+				filterHidden = !filterHidden;
+			}
 		}
 		</script>
 		
@@ -366,7 +378,7 @@
 					<div class="tileHeadingText">Filter</div>
 				</div>
 
-				<div class="tileHeadingText" style="margin-top: 40px">Main Filter</div>
+				<!-- <div class="tileHeadingText" style="margin-top: 40px">Main Filter</div> -->
 				
 				<ul class="flex-container" style="margin-top: 0px;">
 					<li class="filterBox">
@@ -421,9 +433,9 @@
 					</li>
 				</ul>
 				
-				<div class="tileHeadingText">Alternate Filter</div>
+				<!-- <div class="tileHeadingText">Alternate Filter</div> -->
 				
-				<ul class="flex-container" style="margin-top: 0px;">
+				<ul class="flex-container"  id="box1test" style="margin-top: 0px;">
 					<li class="filterBox">
 						<div class="dropdownTitle">
 							<div class="titleAlign">Store</div>
@@ -475,6 +487,11 @@
 						</div>
 					</li>
 				</ul>
+				
+				<div id="d3">
+					<button type="button" onclick="toggleHideFitler2()">Toggle hide filter 2</button>
+				</div
+				
 			</div>
 
 			<div class="noticeMessage">
