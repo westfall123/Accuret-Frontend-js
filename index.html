@@ -27,7 +27,6 @@
 		var chart1, chart2, chart3, chart4, chart5;
 		
 		$(window).load(function() {
-			<!-- Call this initally to create out filters -->
 			globalFilterWidth = $(".filterDropDownColumn").width();
 			createFilters(globalFilterWidth);
 		});
@@ -37,12 +36,6 @@
 		});
 		
 		function handleSizing() {
-			<!-- var browserZoomLevel = Math.round(window.devicePixelRatio * 100); -->
-			<!-- console.log(browserZoomLevel);  -->
-			<!-- var width = globalFilterWidth / (browserZoomLevel/100); -->
-			<!-- console.log(width); -->
-
-			<!-- Recalc Filter sizes -->
 			globalFilterWidth = $(".filterDropDownColumn").width();
 			resizeFilters(globalFilterWidth);
 			resizeCharts();
@@ -172,7 +165,10 @@
 						value: "value"
 					},
 					showCheckbox: true,
-					width: width
+					width: width,
+					select: function (args) {
+						console.log('received click');
+					}
 				});
 			
 				var items = [{
@@ -198,7 +194,10 @@
 						value: "value"
 					},
 					showCheckbox: true,
-					width: width
+					width: width,
+					select: function (args) {
+						console.log('received click');
+					}
 				});
 				
 				var items = [{
@@ -224,7 +223,10 @@
 						value: "value"
 					},
 					showCheckbox: true,
-					width: width
+					width: width,
+					select: function (args) {
+						console.log('received click');
+					}
 				});
 			});
 		}
