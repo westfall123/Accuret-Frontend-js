@@ -26,6 +26,8 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: relative;
     top: 50%;
+    margin-left: -4px;
+    margin-right: 5px;
 }
 
 .dashboardBackground {
