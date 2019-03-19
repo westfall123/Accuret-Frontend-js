@@ -5,44 +5,148 @@
 			xmlns:p="http://primefaces.org/ui">
 
 	<head>
-			<meta charset="utf-8">
-		<!-- <link rel="stylesheet" href="ej.web.all.min.css"/>c -->
+		<meta charset="utf-8">
 		<link rel="stylesheet" href="styles.css"> 
-			<!-- including ECharts file -->
-			<script src="echarts.min.js"></script>
+		<script src="echarts.min.js"></script>
 		<script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
-			<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-			<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-		
-		<!-- style sheet for default theme(flat azure) -->
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 	
-		<link href="http://cdn.syncfusion.com/17.1.0.32/js/web/flat-azure/ej.web.all.min.css"
-				rel="stylesheet" />
-	
-		<!--scripts-->
-		
-		<style>
-			.e-dlla {
-				width: 500px;
-			}
-		</style>
-	
+		<!-- Filter Dropdown Imports-->	
 		<script src="http://cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js"></script>
-	
 		<script src="http://cdn.syncfusion.com/js/assets/external/jquery.easing.1.3.min.js"></script>
-	
 		<script src="http://cdn.syncfusion.com/17.1.0.32/js/web/ej.web.all.min.js"></script>
+		<link href="http://cdn.syncfusion.com/17.1.0.32/js/web/flat-azure/ej.web.all.min.css" rel="stylesheet" />
 		
 	</head>
 
 	<body>
 		<script>
+		var globalFilterWidth = 450;
+		var chart1, chart2, chart3, chart4, chart5;
+		
+		<!-- Call this initally to create out filters -->
+		createFilters(globalFilterWidth);
+		
+		$(window).resize(function() { 
+			handleSizing();
+		});
+		
+		function handleSizing() {
+			var browserZoomLevel = Math.round(window.devicePixelRatio * 100);
+			console.log(browserZoomLevel); 
+			var width = globalFilterWidth / (browserZoomLevel/100);
+			console.log(width);
 
-			// Place your script code here to initialize DropDownList
+			<!-- Recalc Filter sizes -->
+			resizeFilters(width);
+			resizeCharts();
+		}
+		
+		function resizeFilters(width) {
+			$('#dropdown1').ejDropDownList({
+				width: width
+			});
+			$('#dropdown2').ejDropDownList({
+				width: width
+			});
+			$('#dropdown3').ejDropDownList({
+				width: width
+			});
+		}
+		
+		<!-- Create filters initially -->
+		function createFilters(width) {
+			$(function() {
+				var items = [{
+					text: "ListItem 1",
+					value: "item1"
+				}, {
+					text: "ListItem 2",
+					value: "item2"
+				}, {
+					text: "ListItem 3",
+					value: "item3"
+				}, {
+					text: "ListItem 4",
+					value: "item4"
+				}, {
+					text: "ListItem 5",
+					value: "item5"
+				}];
+				$('#dropdown1').ejDropDownList({
+					dataSource: items,
+					fields: {
+						text: "text",
+						value: "value"
+					},
+					showCheckbox: true,
+					width: width
+				});
+			
+				var items = [{
+					text: "ListItem 1",
+					value: "item1"
+				}, {
+					text: "ListItem 2",
+					value: "item2"
+				}, {
+					text: "ListItem 3",
+					value: "item3"
+				}, {
+					text: "ListItem 4",
+					value: "item4"
+				}, {
+					text: "ListItem 5",
+					value: "item5"
+				}];
+				$('#dropdown2').ejDropDownList({
+					dataSource: items,
+					fields: {
+						text: "text",
+						value: "value"
+					},
+					showCheckbox: true,
+					width: width
+				});
+				
+				var items = [{
+					text: "ListItem 1",
+					value: "item1"
+				}, {
+					text: "ListItem 2",
+					value: "item2"
+				}, {
+					text: "ListItem 3",
+					value: "item3"
+				}, {
+					text: "ListItem 4",
+					value: "item4"
+				}, {
+					text: "ListItem 5",
+					value: "item5"
+				}];
+				$('#dropdown3').ejDropDownList({
+					dataSource: items,
+					fields: {
+						text: "text",
+						value: "value"
+					},
+					showCheckbox: true,
+					width: width
+				});
+			});
+		}
+		
+		function resizeCharts() {
+			chart1.resize();
+			chart2.resize();
+			chart3.resize();
+			chart4.resize();
+			chart5.resize();
+		}
 
 		</script>
-
-
 
 		<div class="headingBackground">
 			<div class="headingLine"></div>
@@ -120,36 +224,6 @@
 									</select>
 								</span>
 							</div>
-
-							<script>
-								$(function() {
-									var items = [{
-										text: "ListItem 1",
-										value: "item1"
-									}, {
-										text: "ListItem 2",
-										value: "item2"
-									}, {
-										text: "ListItem 3",
-										value: "item3"
-									}, {
-										text: "ListItem 4",
-										value: "item4"
-									}, {
-										text: "ListItem 5",
-										value: "item5"
-									}];
-									$('#dropdown1').ejDropDownList({
-										dataSource: items,
-										fields: {
-											text: "text",
-											value: "value"
-										},
-										showCheckbox: true,
-										width: 550
-									});
-								});
-							</script>
 						</div>
 					</li>
 					<li class="filterBox">
@@ -166,36 +240,6 @@
 									<option value="item5">ListItem 5</option>
 								</select>
 							</div>
-
-							<script>
-								$(function() {
-									var items = [{
-										text: "ListItem 1",
-										value: "item1"
-									}, {
-										text: "ListItem 2",
-										value: "item2"
-									}, {
-										text: "ListItem 3",
-										value: "item3"
-									}, {
-										text: "ListItem 4",
-										value: "item4"
-									}, {
-										text: "ListItem 5",
-										value: "item5"
-									}];
-									$('#dropdown2').ejDropDownList({
-										dataSource: items,
-										fields: {
-											text: "text",
-											value: "value"
-										},
-										showCheckbox: true,
-										width: 550
-									});
-								});
-							</script>
 						</div>
 					</li>
 					<li class="filterBox">
@@ -212,36 +256,6 @@
 									<option value="item5">ListItem 5</option>
 								</select>
 							</div>
-
-							<script>
-								$(function() {
-									var items = [{
-										text: "ListItem 1",
-										value: "item1"
-									}, {
-										text: "ListItem 2",
-										value: "item2"
-									}, {
-										text: "ListItem 3",
-										value: "item3"
-									}, {
-										text: "ListItem 4",
-										value: "item4"
-									}, {
-										text: "ListItem 5",
-										value: "item5"
-									}];
-									$('#dropdown3').ejDropDownList({
-										dataSource: items,
-										fields: {
-											text: "text",
-											value: "value"
-										},
-										showCheckbox: true,
-										width: 200
-									});
-								});
-							</script>
 						</div>
 					</li>
 				</ul>
@@ -259,8 +273,8 @@
 					<div id="salesSku" style="width: 100%;height:100%;">
 								<script type="text/javascript">
 									// based on prepared DOM, initialize echarts instance
-									var myChart = echarts.init(document.getElementById('salesSku'));
-
+									chart1 = echarts.init(document.getElementById('salesSku'));
+									
 									// specify chart configuration item and data
 									var option = {
 										color: ['#131955',
@@ -301,7 +315,7 @@
 									};
 
 									// use configuration item and data specified to show chart
-									myChart.setOption(option);
+									chart1.setOption(option);
 								</script>
 							</div>
 				</li>
@@ -312,7 +326,7 @@
 					<div id="lostSales" style="width: 100%;height:100%;">
 						<script type="text/javascript">
 							// based on prepared DOM, initialize echarts instance
-							var myChart = echarts.init(document.getElementById('lostSales'));
+							chart2 = echarts.init(document.getElementById('lostSales'));
 
 							// specify chart configuration item and data
 							var option = {
@@ -355,7 +369,7 @@
 									};
 
 							// use configuration item and data specified to show chart
-							myChart.setOption(option);
+							chart2.setOption(option);
 						</script>
 					</div>
 				</li>
@@ -369,7 +383,7 @@
 					<div id="salesStore" style="width: 100%;height:100%;">
 						<script type="text/javascript">
 							// based on prepared DOM, initialize echarts instance
-							var myChart = echarts.init(document.getElementById('salesStore'));
+							chart3 = echarts.init(document.getElementById('salesStore'));
 
 							// specify chart configuration item and data
 							var option = {
@@ -416,7 +430,7 @@
 								};
 
 							// use configuration item and data specified to show chart
-							myChart.setOption(option);
+							chart3.setOption(option);
 						</script>
 					</div>
 				</li>
@@ -427,7 +441,7 @@
 					<div id="lostSales%" style="width: 100%;height:100%;">
 						<script type="text/javascript">
 							// based on prepared DOM, initialize echarts instance
-							myChart = echarts.init(document.getElementById('lostSales%'));
+							chart4 = echarts.init(document.getElementById('lostSales%'));
 
 							// specify chart configuration item and data
 							option = {
@@ -478,7 +492,7 @@
 							};
 
 							// use configuration item and data specified to show chart
-							myChart.setOption(option);
+							chart4.setOption(option);
 							
 								$(window).on('resize', function(){
 									if(myChart != null && myChart != undefined){
@@ -495,7 +509,7 @@
 					<div id="OOS" style="width: 100%;height:100%;">
 						<script type="text/javascript">
 							// based on prepared DOM, initialize echarts instance
-							var myChart = echarts.init(document.getElementById('OOS'));
+							chart5 = echarts.init(document.getElementById('OOS'));
 
 							// specify chart configuration item and data
 							option = {
@@ -546,7 +560,7 @@
 								};
 
 							// use configuration item and data specified to show chart
-							myChart.setOption(option);
+							chart5.setOption(option);
 						</script>
 					</div>
 				</li>
