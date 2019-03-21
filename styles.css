@@ -95,7 +95,6 @@
 }
 
 .filterTile {
-    display: block;
     position: relative;
     width: calc(100% - 18px);
     border: 1px solid #D4D4D4;
@@ -176,21 +175,41 @@
 	text-align: center;
 }
 
-.showFilterBtn {
-    display: inline-block;
-    background: none;
-    border: none;
-    width: 300px;
+.filterBtn:hover {
+    background-color: rgba(175, 175, 175, 0.199);
 }
 
-.showFilterBtn:hover {
-    background-color: rgba(70, 70, 70, 0.753);
+.filterBtnBars {
+    width: 44%;
+    height: 1px;
+    background-color: #3B3F52;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.filterBtnBars2 {
+    width: 44%;
+    height: 1px;
+    background-color: #3B3F52;
+    display: inline-block;
+    margin: 3px;
 }
 
 .moreFilterIcon {
     color: #E15759;
     font-size: 20px;
-    margin-right: 5px;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+.compareToText {
+    display: inline-block;
+    color: #E15759;
+    font-size: 15px;
+	font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 7px;
+    margin-right: 7px;
 }
 
 .dropdownTitle {
