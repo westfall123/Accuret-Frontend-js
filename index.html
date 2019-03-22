@@ -26,6 +26,8 @@
 		var globalFilterWidth;
 		var chart1, chart2, chart3, chart4, chart5;
 		
+		/// FUNCTIONS THAT CALL AFTER THE WINDOW HAS BEEN LOADED ///
+
 		$(window).load(function() {
 			globalFilterWidth = $(".filterDropDownColumn").width();
 			createFilters(globalFilterWidth);
@@ -36,10 +38,17 @@
 			handleSizing();
 		});
 		
+
+
+
+
+
+		
+		/// RESIZING OF FILTERS AND GRAPHS ///
 		function handleSizing() {
 			globalFilterWidth = $(".filterDropDownColumn").width();
 			resizeFilters(globalFilterWidth);
-			<!-- resizeCharts(); -->
+			resizeCharts(); 
 		}
 		
 		function resizeFilters(width) {
@@ -62,7 +71,23 @@
 				width: width
 			});
 		}
-		
+
+		function resizeCharts() {
+			chart1.resize();
+			chart2.resize();
+			chart3.resize();
+			chart4.resize();
+			chart5.resize();
+		}
+
+
+
+
+
+
+		/// FILTER CREATION ///
+
+		// Filter Creation
 		function createFilters(width) {
 			$(function() {
 				var items = [{
@@ -260,66 +285,14 @@
 				});
 			});
 		}
-			
-		function resizeCharts() {
-			chart1.resize();
-			chart2.resize();
-			chart3.resize();
-			chart4.resize();
-			chart5.resize();
-		}
-		
-		function loadDashboardData() {
-			// GET method code
-			//var xhttp = new XMLHttpRequest(); 
-			// xhttp.onreadystatechange = function() { 
-				// if (this.readyState == 4 && this.status == 200) { 
-					// var myObj = JSON.parse(this.responseText); 
-					// console.log(myObj); 
-				// } 
-			// }; 
-			// xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true); 
-			// xhttp.send(); 
-			
-			// Pro tip. Don't waste your time trying to get these on anything but one line. It messes up the formatting and parsing.
-			// Graph 1
-			var json = '[{"SUM_Lost_Sales_Est":"136.2299","SKU_ID":"1"},{"SUM_Lost_Sales_Est":"28.5522","SKU_ID":"2"},{"SUM_Lost_Sales_Est":"2.3529","SKU_ID":"3"},{"SUM_Lost_Sales_Est":"38.3255","SKU_ID":"4"},{"SUM_Lost_Sales_Est":"4.9924","SKU_ID":"5"},{"SUM_Lost_Sales_Est":"21.0692","SKU_ID":"6"},{"SUM_Lost_Sales_Est":"6.9556","SKU_ID":"7"},{"SUM_Lost_Sales_Est":"45.6914","SKU_ID":"8"},{"SUM_Lost_Sales_Est":"20.1704","SKU_ID":"9"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"10"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"11"}]';
-			// get array here
-			var graph1 = JSON.parse(json);
-			
-			// Graph 3
-			var json1 = '[{"Sales_Date": "2017-01-01","SUM_Lost_Sales_Est": "0.0000"},{"Sales_Date": "2017-01-02","SUM_Lost_Sales_Est": "0.0264"}]';
-			var graph2 = JSON.parse(json1);
-			
-			var dataArray = [graph1, graph2];
 
-			configureDataForCharts(dataArray);
-		}
 
-		function compareEstLostSales(a, b) {			
-			const varA = parseFloat(a.SUM_Lost_Sales_Est);
-			const varB = parseFloat(b.SUM_Lost_Sales_Est);
-			var comparison = 0;
-			if (varA >= varB) {
-				comparison = 1;
-			} 
-			else {
-				comparison = -1;
-			}
-			return comparison;
-		}
-		
-		function jsonToList(json, key_x, key_y) {
-			Object.keys(json)[0]
-			var dataSet = {x: [], y: []};
-			for(i=0;i<json.length;i++) {
-				dataSet.x.push(json[i][key_x]);
-				dataSet.y.push(json[i][key_y]);
-			}
-			// object of two arrays (x, y) points
-			return dataSet;
-		}
 
+
+
+		/// CHART CREATION ///
+
+		// Chart 1 Creation
 		function configureChart1(data) {
 			// sort
 			data = data.sort(compareEstLostSales);
@@ -327,7 +300,7 @@
 			var subsetData = data.slice(0, 10);
 
 			// convert to dataset
-			var dataset1 = jsonToList(subsetData, "SUM_Lost_Sales_Est", "SKU_ID");
+			var dataset1 = arrayToDataset(subsetData, "SUM_Lost_Sales_Est", "SKU_ID");
 
 			// setup chart
 
@@ -390,6 +363,7 @@
 			chart1.setOption(option);
 		}
 
+		// Creation for all the charts
 		function configureDataForCharts(dataArray) {
 			configureChart1(dataArray[0]);
 			
@@ -601,17 +575,92 @@
 			// use configuration item and data specified to show chart
 			chart5.setOption(option);
 		}
+
+
+
+
+
+		/// Loading of Dashboard Data into Charts ///
+
+		// This function loads the JSON data into the charts
+		function loadDashboardData() {
+			// Pro tip. Don't waste your time trying to get these on anything but one line. It messes up the formatting and parsing.
+
+			// Chart 1
+			var json = '[{"SUM_Lost_Sales_Est":"136.2299","SKU_ID":"1"},{"SUM_Lost_Sales_Est":"28.5522","SKU_ID":"2"},{"SUM_Lost_Sales_Est":"2.3529","SKU_ID":"3"},{"SUM_Lost_Sales_Est":"38.3255","SKU_ID":"4"},{"SUM_Lost_Sales_Est":"4.9924","SKU_ID":"5"},{"SUM_Lost_Sales_Est":"21.0692","SKU_ID":"6"},{"SUM_Lost_Sales_Est":"6.9556","SKU_ID":"7"},{"SUM_Lost_Sales_Est":"45.6914","SKU_ID":"8"},{"SUM_Lost_Sales_Est":"20.1704","SKU_ID":"9"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"10"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"11"}]';
+			// get array here
+			var chart1 = JSON.parse(json);
+			
+			// Chart 2
+
+			// Chart 3
+			var json1 = '[{"Sales_Date": "2017-01-01","SUM_Lost_Sales_Est": "0.0000"},{"Sales_Date": "2017-01-02","SUM_Lost_Sales_Est": "0.0264"}]';
+			var chart2 = JSON.parse(json1);
+
+			// Chart 4 
+
+			// Chart 5
+			
+			var dataArray = [chart1, chart2];
+
+			configureDataForCharts(dataArray);
+		}
+
+		/* Generic function which takes in an array and converts it to an object with two fields, an array of all the x coorindate values
+		and an array of all the y coordinate values. Looking at a element at the same index in both x and y arrays is effectively and (x, y) coordinate.
+		Params: array, key_x, key_y
+		array: an array in which each element is an object with two fields. The object is a data point and the two fields are the x and y points.
+		key_x: a string which defines the field on the elements of array which corresponds to the x value
+		key_xy a string which defines the field on the elements of array which corresponds to the y value
+		 */
+		 function arrayToDataset(array, key_x, key_y) {
+			var dataSet = {x: [], y: []};
+			for(i=0;i<array.length;i++) {
+				dataSet.x.push(array[i][key_x]);
+				dataSet.y.push(array[i][key_y]);
+			}
+			// object of two arrays (x, y) points
+			return dataSet;
+		}
+
+
+
+
+		/// SORTING ALGORITHMS ///
+
+		/* Comparison function usable for both Chart 1 and Chart 2.
+		Returns 1 for a >= b
+		Returns -1 if b < a
+		*/
+		function compareEstLostSales(a, b) {			
+			const varA = parseFloat(a.SUM_Lost_Sales_Est);
+			const varB = parseFloat(b.SUM_Lost_Sales_Est);
+			var comparison = 0;
+			if (varA >= varB) {
+				comparison = 1;
+			} 
+			else {
+				comparison = -1;
+			}
+			return comparison;
+		}
+	
+
 		
-		function postData() {
-			var xhttp = new xmlhttprequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readystate == 4 && this.status == 200) {
-					this.responsetext;
-					
-				}
-			};
-			xhttp.open("post", "https://jsonplaceholder.typicode.com/posts", true);
-			xhttp.send();
+		/// AJAX METHODS ///
+		
+		// AJAX method to call the server via a GET request
+		function getData() {
+			// GET method code
+			//var xhttp = new XMLHttpRequest(); 
+			// xhttp.onreadystatechange = function() { 
+				// if (this.readyState == 4 && this.status == 200) { 
+					// var myObj = JSON.parse(this.responseText); 
+					// console.log(myObj); 
+				// } 
+			// }; 
+			// xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true); 
+			// xhttp.send(); 
 		}
 		
 		var filterHidden = false;
@@ -634,12 +683,12 @@
 		
 		<div id="d1">
 			<h1>Load Dashboard Data</h1>
-			<button type="button" onclick="loadDashboardData()">Change Content</button>
+			<button type="button" onclick="loadDashboardData()">Load</button>
 		</div>
 		
 		<div id="d2">
-			<h1>Post Data to Server</h1>
-			<button type="button" onclick="postData()">Change Content</button>
+			<h1>Get Data From Server</h1>
+			<button type="button" onclick="getData()">Get Data Test</button>
 		</div>
 
 		<div class="headingBackground">
