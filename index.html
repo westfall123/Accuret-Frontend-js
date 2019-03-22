@@ -271,33 +271,66 @@
 		
 		function loadDashboardData() {
 			// GET method code
-			<!-- var xhttp = new XMLHttpRequest(); -->
-			<!-- xhttp.onreadystatechange = function() { -->
-				<!-- if (this.readyState == 4 && this.status == 200) { -->
-					<!-- var myObj = JSON.parse(this.responseText); -->
-					<!-- console.log(myObj); -->
-				<!-- } -->
-			<!-- }; -->
-			<!-- xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true); -->
-			<!-- xhttp.send(); -->
+			//var xhttp = new XMLHttpRequest(); 
+			// xhttp.onreadystatechange = function() { 
+				// if (this.readyState == 4 && this.status == 200) { 
+					// var myObj = JSON.parse(this.responseText); 
+					// console.log(myObj); 
+				// } 
+			// }; 
+			// xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true); 
+			// xhttp.send(); 
 			
 			// Pro tip. Don't waste your time trying to get these on anything but one line. It messes up the formatting and parsing.
 			// Graph 1
-			var json = '[{"SUM_Lost_Sales_Est":"136.2299","SKU_ID":"1"},{"SUM_Lost_Sales_Est":"28.5522","SKU_ID":"2"},{"SUM_Lost_Sales_Est":"2.3529","SKU_ID":"3"},{"SUM_Lost_Sales_Est":"38.3255","SKU_ID":"4"},{"SUM_Lost_Sales_Est":"4.9924","SKU_ID":"5"},{"SUM_Lost_Sales_Est":"21.0692","SKU_ID":"6"},{"SUM_Lost_Sales_Est":"6.9556","SKU_ID":"7"},{"SUM_Lost_Sales_Est":"45.6914","SKU_ID":"8"},{"SUM_Lost_Sales_Est":"20.1704","SKU_ID":"9"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"10"}]';
+			var json = '[{"SUM_Lost_Sales_Est":"136.2299","SKU_ID":"1"},{"SUM_Lost_Sales_Est":"28.5522","SKU_ID":"2"},{"SUM_Lost_Sales_Est":"2.3529","SKU_ID":"3"},{"SUM_Lost_Sales_Est":"38.3255","SKU_ID":"4"},{"SUM_Lost_Sales_Est":"4.9924","SKU_ID":"5"},{"SUM_Lost_Sales_Est":"21.0692","SKU_ID":"6"},{"SUM_Lost_Sales_Est":"6.9556","SKU_ID":"7"},{"SUM_Lost_Sales_Est":"45.6914","SKU_ID":"8"},{"SUM_Lost_Sales_Est":"20.1704","SKU_ID":"9"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"10"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"11"}]';
+			// get array here
 			var graph1 = JSON.parse(json);
-			var list = jsonToList(graph1);
+			
 			// Graph 3
 			var json1 = '[{"Sales_Date": "2017-01-01","SUM_Lost_Sales_Est": "0.0000"},{"Sales_Date": "2017-01-02","SUM_Lost_Sales_Est": "0.0264"}]';
 			var graph2 = JSON.parse(json1);
 			
-			console.log(graph1);
-			console.log(graph2);
-			configureDataForCharts(list);
+			var dataArray = [graph1, graph2];
+
+			configureDataForCharts(dataArray);
+		}
+
+		function compareEstLostSales(a, b) {			
+			const varA = parseFloat(a.SUM_Lost_Sales_Est);
+			const varB = parseFloat(b.SUM_Lost_Sales_Est);
+			var comparison = 0;
+			if (varA >= varB) {
+				comparison = 1;
+			} 
+			else {
+				comparison = -1;
+			}
+			return comparison;
 		}
 		
-		function configureDataForCharts(dataset1) {
-			// CHART 1
-			// based on prepared DOM, initialize echarts instance
+		function jsonToList(json, key_x, key_y) {
+			Object.keys(json)[0]
+			var dataSet = {x: [], y: []};
+			for(i=0;i<json.length;i++) {
+				dataSet.x.push(json[i][key_x]);
+				dataSet.y.push(json[i][key_y]);
+			}
+			// object of two arrays (x, y) points
+			return dataSet;
+		}
+
+		function configureChart1(data) {
+			// sort
+			data = data.sort(compareEstLostSales);
+			// slice since we only display 10 SKUs max
+			var subsetData = data.slice(0, 10);
+
+			// convert to dataset
+			var dataset1 = jsonToList(subsetData, "SUM_Lost_Sales_Est", "SKU_ID");
+
+			// setup chart
+
 			chart1 = echarts.init(document.getElementById('salesSku'));
 			
 			// specify chart configuration item and data
@@ -338,7 +371,7 @@
 				],
 				yAxis: {
 					type: 'category',
-					data: dataset1.x,
+					data: dataset1.y,
 					name: 'SKU ID',
 					nameLocation: 'end',
 					nameGap: 5,
@@ -348,13 +381,17 @@
 				},
 				series: [{
 					name: 'Lost Sales By SKU',
-					data: dataset1.y,
+					data: dataset1.x,
 					type: 'bar',
 				}]
 			};
 			
 			// use configuration item and data specified to show chart
 			chart1.setOption(option);
+		}
+
+		function configureDataForCharts(dataArray) {
+			configureChart1(dataArray[0]);
 			
 			// CHART 2
 			
@@ -563,16 +600,6 @@
 
 			// use configuration item and data specified to show chart
 			chart5.setOption(option);
-		}
-		
-		function jsonToList(json) {
-			var dataSet = {x: [], y: []};
-			for(i=0;i<json.length;i++) {
-				dataSet.x.push(json[i].SKU_ID);
-				dataSet.y.push(json[i].SUM_Lost_Sales_Est);
-			}
-			// object of two arrays (x, y) points
-			return dataSet;
 		}
 		
 		function postData() {
