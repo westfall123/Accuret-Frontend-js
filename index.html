@@ -39,7 +39,7 @@
 		function handleSizing() {
 			globalFilterWidth = $(".filterDropDownColumn").width();
 			resizeFilters(globalFilterWidth);
-			resizeCharts();
+			<!-- resizeCharts(); -->
 		}
 		
 		function resizeFilters(width) {
@@ -260,7 +260,7 @@
 				});
 			});
 		}
-		
+			
 		function resizeCharts() {
 			chart1.resize();
 			chart2.resize();
@@ -270,15 +270,309 @@
 		}
 		
 		function loadDashboardData() {
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					var myObj = JSON.parse(this.responseText);
-					console.log(myObj);
-				}
+			// GET method code
+			<!-- var xhttp = new XMLHttpRequest(); -->
+			<!-- xhttp.onreadystatechange = function() { -->
+				<!-- if (this.readyState == 4 && this.status == 200) { -->
+					<!-- var myObj = JSON.parse(this.responseText); -->
+					<!-- console.log(myObj); -->
+				<!-- } -->
+			<!-- }; -->
+			<!-- xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true); -->
+			<!-- xhttp.send(); -->
+			
+			// Pro tip. Don't waste your time trying to get these on anything but one line. It messes up the formatting and parsing.
+			// Graph 1
+			var json = '[{"SUM_Lost_Sales_Est":"136.2299","SKU_ID":"1"},{"SUM_Lost_Sales_Est":"28.5522","SKU_ID":"2"},{"SUM_Lost_Sales_Est":"2.3529","SKU_ID":"3"},{"SUM_Lost_Sales_Est":"38.3255","SKU_ID":"4"},{"SUM_Lost_Sales_Est":"4.9924","SKU_ID":"5"},{"SUM_Lost_Sales_Est":"21.0692","SKU_ID":"6"},{"SUM_Lost_Sales_Est":"6.9556","SKU_ID":"7"},{"SUM_Lost_Sales_Est":"45.6914","SKU_ID":"8"},{"SUM_Lost_Sales_Est":"20.1704","SKU_ID":"9"},{"SUM_Lost_Sales_Est":"97.0955","SKU_ID":"10"}]';
+			var graph1 = JSON.parse(json);
+			var list = jsonToList(graph1);
+			// Graph 3
+			var json1 = '[{"Sales_Date": "2017-01-01","SUM_Lost_Sales_Est": "0.0000"},{"Sales_Date": "2017-01-02","SUM_Lost_Sales_Est": "0.0264"}]';
+			var graph2 = JSON.parse(json1);
+			
+			console.log(graph1);
+			console.log(graph2);
+			configureDataForCharts(list);
+		}
+		
+		function configureDataForCharts(dataset1) {
+			// CHART 1
+			// based on prepared DOM, initialize echarts instance
+			chart1 = echarts.init(document.getElementById('salesSku'));
+			
+			// specify chart configuration item and data
+			var option = {
+				color: ['#131955',
+				'#3c4072',
+				'#222a82',
+				'#2e4064',
+				'#092764',
+				'#193163'],
+				
+				tooltip: {
+					trigger: 'item',
+					formatter: '{a} <br/>{b}: {c}'
+				},
+				xAxis: {
+					type: 'value',
+					name: 'Total Lost Sales',
+					nameLocation: 'middle',
+					nameGap: 35,
+					nameTextStyle: {
+					fontWeight: 'bold'
+					}
+				},
+				dataZoom: [
+					{
+						id: 'dataZoomX',
+						type: 'slider',
+						xAxisIndex: [0],
+						filterMode: 'filter'
+					},
+					{
+						id: 'dataZoomY',
+						type: 'slider',
+						yAxisIndex: [0],
+						filterMode: 'empty'
+					}
+				],
+				yAxis: {
+					type: 'category',
+					data: dataset1.x,
+					name: 'SKU ID',
+					nameLocation: 'end',
+					nameGap: 5,
+					nameTextStyle: {
+						fontWeight: 'bold'
+					}
+				},
+				series: [{
+					name: 'Lost Sales By SKU',
+					data: dataset1.y,
+					type: 'bar',
+				}]
 			};
-			xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
-			xhttp.send();
+			
+			// use configuration item and data specified to show chart
+			chart1.setOption(option);
+			
+			// CHART 2
+			
+			chart2 = echarts.init(document.getElementById('lostSales'));
+
+			// specify chart configuration item and data
+			option = {
+					color: ['#131955',
+					'#3c4072',
+					'#222a82',
+					'#2e4064',
+					'#092764',
+					'#193163'],
+					tooltip: {
+						trigger: 'item',
+						formatter: '{a} <br/>{b}: {c}'
+					},
+					xAxis: {
+						type: 'category',
+						boundaryGap: false,
+						data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+						name: 'Day of Date [2017]',
+						nameLocation: 'middle',
+						nameGap: 35,
+						nameTextStyle: {
+						fontWeight: 'bold'
+						}
+					},
+					yAxis: {
+						type: 'value',
+						name: 'Total Lost Sales',
+						nameLocation: 'middle',
+						nameGap: 43,
+						nameTextStyle: {
+						fontWeight: 'bold'
+						}
+					},
+					series: [{
+						name: 'Total Lost Sales',
+						data: [820, 932, 607, 1300, 1290, 1330, 1320],
+						type: 'line',
+						areaStyle: {}
+					}]
+					};
+
+			// use configuration item and data specified to show chart
+			chart2.setOption(option);
+			
+			// CHART 3
+			// based on prepared DOM, initialize echarts instance
+			chart3 = echarts.init(document.getElementById('salesStore'));
+
+			// specify chart configuration item and data
+			option = {
+				color: ['#131955',
+				'#3c4072',
+				'#222a82',
+				'#2e4064',
+				'#092764',
+				'#193163'],
+				tooltip: {
+					trigger: 'item',
+					formatter: '{a} <br/>{b}: {c}'
+				},
+				xAxis: {
+					type: 'value',
+					name: 'Total Lost Sales',
+					nameLocation: 'middle',
+					nameGap: 35,
+					nameTextStyle: {
+					fontWeight: 'bold'
+					}
+				},
+				yAxis: {
+					type: 'category',
+					data: ['37', '27', '26', '88', '65', '89', '51', '94', '58'],
+					name: 'Store ID',
+					nameLocation: 'end',
+					nameGap: 5,
+					nameTextStyle: {
+						fontWeight: 'bold'
+					}
+				},
+				series: [{
+					data: [440, 450, 470, 480, 490, 500, 510, 515, 590],
+					type: 'bar'
+					},
+					{
+					data: [230, 567, 100, 230, 230, 230, 230, 230, 230],
+					type: 'bar',
+					barWidth: '60%',
+					barGap:'-100'
+					}
+				]
+				};
+
+			// use configuration item and data specified to show chart
+			chart3.setOption(option);
+			
+			// CHART 4
+			// based on prepared DOM, initialize echarts instance
+			chart4 = echarts.init(document.getElementById('lostSales%'));
+
+			// specify chart configuration item and data
+			option = {
+					color: ['#131955',
+					'#3c4072',
+					'#222a82',
+					'#2e4064',
+					'#092764',
+					'#193163'
+				],
+				tooltip: {
+					trigger: 'item',
+					formatter: '{a} <br/>{b}: {c}'
+				},
+				xAxis: {
+					name: 'Lost Sales Units',
+					nameLocation: 'middle',
+					nameGap: 35,
+					nameTextStyle: {
+					fontWeight: 'bold'
+					}
+				},
+				yAxis: {
+					name: 'Lost Sales %',
+					nameLocation: 'middle',
+					nameGap: 25,
+					nameTextStyle: {
+					fontWeight: 'bold'
+					},
+				},
+				series: [{
+					name: 'Lost Sales % vs Unit',
+					data: [
+					[10.0, 8.04],
+					[8.0, 6.95],
+					[13.0, 7.58],
+					[9.0, 8.81],
+					[11.0, 8.33],
+					[14.0, 9.96],
+					[6.0, 7.24],
+					[4.0, 4.26],
+					[12.0, 10.84],
+					[7.0, 4.82],
+					[5.0, 5.68]
+					],
+					type: 'scatter'
+				}]
+			};
+
+			// use configuration item and data specified to show chart
+			chart4.setOption(option);
+			
+			// CHART 5
+			// based on prepared DOM, initialize echarts instance
+			chart5 = echarts.init(document.getElementById('OOS'));
+
+			// specify chart configuration item and data
+			option = {
+					color: ['#131955',
+					'#3c4072',
+					'#222a82',
+					'#2e4064',
+					'#092764',
+					'#193163'
+				],
+				tooltip: {
+					trigger: 'item',
+					formatter: '{a} <br/>{b}: {c}'
+				},
+				xAxis: {
+					name: 'Lost Sales Units',
+					nameLocation: 'middle',
+					nameGap: 35,
+					nameTextStyle: {
+					fontWeight: 'bold'
+					}
+				},
+				yAxis: {
+					name: 'Lost Sales %',
+					nameLocation: 'middle',
+					nameGap: 25,
+					nameTextStyle: {
+					fontWeight: 'bold'
+					},
+				},
+				series: [{
+					name: 'Lost Sales % vs Unit',
+					data: [
+					[10.0, 8.04],
+					[8.0, 6.95],
+					[13.0, 7.58],
+					[9.0, 8.81],
+					[11.0, 8.33],
+					[14.0, 9.96],
+					[6.0, 7.24],
+					[4.0, 4.26],
+					[12.0, 10.84],
+					[7.0, 4.82],
+					[5.0, 5.68]
+					],
+					type: 'scatter'
+				}]
+				};
+
+			// use configuration item and data specified to show chart
+			chart5.setOption(option);
+		}
+		
+		function jsonToList(json) {
+			var dataSet = {x: [], y: []};
+			for(i=0;i<json.length;i++) {
+				dataSet.x.push(json[i].SKU_ID);
+				dataSet.y.push(json[i].SUM_Lost_Sales_Est);
+			}
+			// object of two arrays (x, y) points
+			return dataSet;
 		}
 		
 		function postData() {
@@ -312,12 +606,12 @@
 		</script>
 		
 		<div id="d1">
-			<h1>The XMLHttpRequest Object</h1>
+			<h1>Load Dashboard Data</h1>
 			<button type="button" onclick="loadDashboardData()">Change Content</button>
 		</div>
 		
 		<div id="d2">
-			<h1>The XMLHttpRequest Object</h1>
+			<h1>Post Data to Server</h1>
 			<button type="button" onclick="postData()">Change Content</button>
 		</div>
 
@@ -519,108 +813,13 @@
 					<div class="tileHeading">
 						<div class="tileHeadingText">Lost Sales by SKU</div>
 					</div>
-					<div id="salesSku" style="width: 100%;height:100%;">
-						<script type="text/javascript">
-							// based on prepared DOM, initialize echarts instance
-							chart1 = echarts.init(document.getElementById('salesSku'));
-							
-							// specify chart configuration item and data
-							var option = {
-								color: ['#131955',
-								'#3c4072',
-								'#222a82',
-								'#2e4064',
-								'#092764',
-								'#193163'],
-								
-								tooltip: {
-									trigger: 'item',
-									formatter: '{a} <br/>{b}: {c}'
-								},
-								xAxis: {
-									type: 'value',
-									name: 'Total Lost Sales',
-									nameLocation: 'middle',
-									nameGap: 35,
-									nameTextStyle: {
-									fontWeight: 'bold'
-									}
-								},
-								yAxis: {
-									type: 'category',
-									data: ['5', '3', '7', '8', '9', '4', '2', '6', '10', '1', '5', '3', '7', '8', '9', '4', '2', '6', '10', '1', '5', '3', '7', '8', '9', '4', '2', '6', '10', '1'],
-									name: 'SKU ID',
-									nameLocation: 'end',
-									nameGap: 5,
-									nameTextStyle: {
-										fontWeight: 'bold'
-									}
-								},
-								series: [{
-									name: 'Lost Sales By SKU',
-									data: [800, 900, 1000, 1700, 1850, 2500, 4950, 5400, 5800, 11000, 800, 900, 1000, 1700, 1850, 2500, 4950, 5400, 5800, 11000, 800, 900, 1000, 1700, 1850, 2500, 4950, 5400, 5800, 11000],
-									type: 'bar'
-								}]
-							};
-
-							// use configuration item and data specified to show chart
-							chart1.setOption(option);
-						</script>
-					</div>
+					<div id="salesSku" style="width: 100%;height:100%;"></div>
 				</li>
 				<li class="graphBox" style="width: 65.4%">
 					<div class="tileHeading">
 						<div class="tileHeadingText">Total Lost Sales Over Time</div>
 					</div>
-					<div id="lostSales" style="width: 100%;height:100%;">
-						<script type="text/javascript">
-							// based on prepared DOM, initialize echarts instance
-							chart2 = echarts.init(document.getElementById('lostSales'));
-
-							// specify chart configuration item and data
-							var option = {
-									color: ['#131955',
-									'#3c4072',
-									'#222a82',
-									'#2e4064',
-									'#092764',
-									'#193163'],
-									tooltip: {
-										trigger: 'item',
-										formatter: '{a} <br/>{b}: {c}'
-									},
-									xAxis: {
-										type: 'category',
-										boundaryGap: false,
-										data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-										name: 'Day of Date [2017]',
-										nameLocation: 'middle',
-										nameGap: 35,
-										nameTextStyle: {
-										fontWeight: 'bold'
-										}
-									},
-									yAxis: {
-										type: 'value',
-										name: 'Total Lost Sales',
-										nameLocation: 'middle',
-										nameGap: 43,
-										nameTextStyle: {
-										fontWeight: 'bold'
-										}
-									},
-									series: [{
-										name: 'Total Lost Sales',
-										data: [820, 932, 607, 1300, 1290, 1330, 1320],
-										type: 'line',
-										areaStyle: {}
-									}]
-									};
-
-							// use configuration item and data specified to show chart
-							chart2.setOption(option);
-						</script>
-					</div>
+					<div id="lostSales" style="width: 100%;height:100%;"></div>
 				</li>
 			</ul>
 
@@ -629,183 +828,19 @@
 					<div class="tileHeading">
 						<div class="tileHeadingText">Lost Sales By Store</div>
 					</div>
-					<div id="salesStore" style="width: 100%;height:100%;">
-						<script type="text/javascript">
-							// based on prepared DOM, initialize echarts instance
-							chart3 = echarts.init(document.getElementById('salesStore'));
-
-							// specify chart configuration item and data
-							var option = {
-								color: ['#131955',
-								'#3c4072',
-								'#222a82',
-								'#2e4064',
-								'#092764',
-								'#193163'],
-								tooltip: {
-									trigger: 'item',
-									formatter: '{a} <br/>{b}: {c}'
-								},
-								xAxis: {
-									type: 'value',
-									name: 'Total Lost Sales',
-									nameLocation: 'middle',
-									nameGap: 35,
-									nameTextStyle: {
-									fontWeight: 'bold'
-									}
-								},
-								yAxis: {
-									type: 'category',
-									data: ['37', '27', '26', '88', '65', '89', '51', '94', '58'],
-									name: 'Store ID',
-									nameLocation: 'end',
-									nameGap: 5,
-									nameTextStyle: {
-										fontWeight: 'bold'
-									}
-								},
-								series: [{
-									data: [440, 450, 470, 480, 490, 500, 510, 515, 590],
-									type: 'bar'
-									},
-									{
-									data: [230, 567, 100, 230, 230, 230, 230, 230, 230],
-									type: 'bar',
-									barWidth: '60%',
-									barGap:'-100'
-									}
-								]
-								};
-
-							// use configuration item and data specified to show chart
-							chart3.setOption(option);
-						</script>
-					</div>
+					<div id="salesStore" style="width: 100%;height:100%;"></div>
 				</li>
 				<li class="graphBox">
 					<div class="tileHeading">
 						<div class="tileHeadingText">Lost sales% vs lost sales units</div>
 					</div>
-					<div id="lostSales%" style="width: 100%;height:100%;">
-						<script type="text/javascript">
-							// based on prepared DOM, initialize echarts instance
-							chart4 = echarts.init(document.getElementById('lostSales%'));
-
-							// specify chart configuration item and data
-							option = {
-									color: ['#131955',
-									'#3c4072',
-									'#222a82',
-									'#2e4064',
-									'#092764',
-									'#193163'
-								],
-								tooltip: {
-									trigger: 'item',
-									formatter: '{a} <br/>{b}: {c}'
-								},
-								xAxis: {
-									name: 'Lost Sales Units',
-									nameLocation: 'middle',
-									nameGap: 35,
-									nameTextStyle: {
-									fontWeight: 'bold'
-									}
-								},
-								yAxis: {
-									name: 'Lost Sales %',
-									nameLocation: 'middle',
-									nameGap: 25,
-									nameTextStyle: {
-									fontWeight: 'bold'
-									},
-								},
-								series: [{
-									name: 'Lost Sales % vs Unit',
-									data: [
-									[10.0, 8.04],
-									[8.0, 6.95],
-									[13.0, 7.58],
-									[9.0, 8.81],
-									[11.0, 8.33],
-									[14.0, 9.96],
-									[6.0, 7.24],
-									[4.0, 4.26],
-									[12.0, 10.84],
-									[7.0, 4.82],
-									[5.0, 5.68]
-									],
-									type: 'scatter'
-								}]
-							};
-
-							// use configuration item and data specified to show chart
-							chart4.setOption(option);
-						</script>
-					</div>
+					<div id="lostSales%" style="width: 100%;height:100%;"></div>
 				</li>
 				<li class="graphBox">
 					<div class="tileHeading">
 						<div class="tileHeadingText">Transitions to OOS</div>
 					</div>
-					<div id="OOS" style="width: 100%;height:100%;">
-						<script type="text/javascript">
-							// based on prepared DOM, initialize echarts instance
-							chart5 = echarts.init(document.getElementById('OOS'));
-
-							// specify chart configuration item and data
-							option = {
-									color: ['#131955',
-									'#3c4072',
-									'#222a82',
-									'#2e4064',
-									'#092764',
-									'#193163'
-								],
-								tooltip: {
-									trigger: 'item',
-									formatter: '{a} <br/>{b}: {c}'
-								},
-								xAxis: {
-									name: 'Lost Sales Units',
-									nameLocation: 'middle',
-									nameGap: 35,
-									nameTextStyle: {
-									fontWeight: 'bold'
-									}
-								},
-								yAxis: {
-									name: 'Lost Sales %',
-									nameLocation: 'middle',
-									nameGap: 25,
-									nameTextStyle: {
-									fontWeight: 'bold'
-									},
-								},
-								series: [{
-									name: 'Lost Sales % vs Unit',
-									data: [
-									[10.0, 8.04],
-									[8.0, 6.95],
-									[13.0, 7.58],
-									[9.0, 8.81],
-									[11.0, 8.33],
-									[14.0, 9.96],
-									[6.0, 7.24],
-									[4.0, 4.26],
-									[12.0, 10.84],
-									[7.0, 4.82],
-									[5.0, 5.68]
-									],
-									type: 'scatter'
-								}]
-								};
-
-							// use configuration item and data specified to show chart
-							chart5.setOption(option);
-						</script>
-					</div>
+					<div id="OOS" style="width: 100%;height:100%;"></div>
 				</li>
 			</ul>
 		</div>
