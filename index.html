@@ -25,6 +25,10 @@
 		<script>
 		var globalFilterWidth;
 		var chart1, chart2, chart3, chart4, chart5;
+
+		var sampleJSON = {
+
+		}
 		
 		$(window).load(function() {
 			globalFilterWidth = $(".filterDropDownColumn").width();
@@ -92,8 +96,7 @@
 					change: function (args) 
 					{
 						var obj = $('#dropdown1_1').data("ejDropDownList");
-						console.log("Selected Item's Text - " + obj.option("text"));
-						console.log("selected Item's Value - " + obj.option("value"));                 
+						filter(obj.value, "store");                
 					}
 				});
 			
@@ -124,8 +127,7 @@
 					change: function (args) 
 					{
 						var obj = $('#dropdown2_1').data("ejDropDownList");
-						console.log("Selected Item's Text - " + obj.option("text"));
-						console.log("selected Item's Value - " + obj.option("value"));                 
+						filter(obj.value, "sku");                
 					}
 				});
 				
@@ -156,8 +158,7 @@
 					change: function (args) 
 					{
 						var obj = $('#dropdown3_1').data("ejDropDownList");
-						console.log("Selected Item's Text - " + obj.option("text"));
-						console.log("selected Item's Value - " + obj.option("value"));                 
+						filter(obj.value, "time");                
 					}
 				});
 				
@@ -187,10 +188,8 @@
 					width: width,
 					change: function (args) 
 					{
-					    console.log('received click');
 						var obj = $('#dropdown1_2').data("ejDropDownList");
-						console.log("Selected Item's Text - " + obj.option("text"));
-						console.log("selected Item's Value - " + obj.option("value"));                 
+						filter(obj.value, "store");              
 					}
 				});
 			
@@ -220,10 +219,8 @@
 					width: width,
 					change: function (args) 
 					{
-					    console.log('received click');
 						var obj = $('#dropdown2_2').data("ejDropDownList");
-						console.log("Selected Item's Text - " + obj.option("text"));
-						console.log("selected Item's Value - " + obj.option("value"));                 
+						filter(obj.value, "store");              
 					}
 				});
 				
@@ -254,8 +251,7 @@
 					change: function (args) 
 					{
 						var obj = $('#dropdown3_2').data("ejDropDownList");
-						console.log("Selected Item's Text - " + obj.option("text"));
-						console.log("selected Item's Value - " + obj.option("value"));                 
+						filter(obj.value, "store");              
 					}
 				});
 			});
@@ -274,7 +270,6 @@
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					var myObj = JSON.parse(this.responseText);
-					console.log(myObj);
 				}
 			};
 			xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
@@ -308,6 +303,22 @@
 				filterHidden = !filterHidden;
 				icon.className = "fas fa-angle-up moreFilterIcon";
 			}
+		}
+
+		function filter(value, filterType) {
+			if (filterType === "store") {
+				console.log("here in store");
+			} else if (filterType === "sku") {
+				console.log("here in sku");
+			} else {
+				console.log("here in time");
+			}
+		}
+
+		function testAddFilter() {
+			chart1Options.series.push(chart1.series, {name: "data 2", data: [1000, 800, 1200, 300, 550, 490, 870, 950, 392, 120, 900, 1100, 1300, 1400, 1500, 400,
+			900, 1500, 900, 450, 680, 380, 890, 908, 490, 380, 549, 540, 340, 320], type: "bar"});
+			chart1.setOption(chart1Options);
 		}
 		</script>
 		
@@ -379,7 +390,7 @@
 				</li>
 			</ul>
 		
-			<div class="filterTile" style="padding-bottom: 30px;">
+			<div class="filterTile" style="padding-bottom: 45px;">
 				<div class="tileHeading">
 					<div class="tileHeadingText">Filter</div>
 				</div>
@@ -439,7 +450,7 @@
 					</li>
 				</ul>
 				
-				<div id="box1test" style="margin-bottom: 20px;">
+				<div id="box1test" style="margin-bottom: 5px;">
 					<div style="width: 100%; text-align: center; position: relative; bottom: 0px; margin-bottom: 10px; margin-top: 20px">
 						<div class="filterBtnBars2"></div>
 						<div class="compareToText">compare to</div>
@@ -500,12 +511,18 @@
 					</ul>
 				</div>
 
-				<div style="width: 100%; text-align: center; position: absolute; bottom: 0px; margin-bottom: 5px;" onclick="toggleAlternateFilter()">
+				<div style="width: 100%; text-align: center; position: absolute; bottom: 0px; background-color: #E6E6E6; height: 30px" onclick="toggleAlternateFilter()">
 					<div class="filterBtn">
 						<div class="filterBtnBars"></div>
 						<i class="fas fa-angle-down moreFilterIcon" id="filterDropdown"></i>
 						<div class="filterBtnBars"></div>
 					</div>
+				</div>
+			</div>
+
+			<div style="width: 100%; position: relative; bottom: 0px; height: 30px" onclick="testAddFilter()">
+				<div class="filterBtn">
+					<i class="fas fa-angle-down moreFilterIcon" id="filterDropdown"></i>
 				</div>
 			</div>
 
@@ -525,7 +542,7 @@
 							chart1 = echarts.init(document.getElementById('salesSku'));
 							
 							// specify chart configuration item and data
-							var option = {
+							var chart1Options = {
 								color: ['#131955',
 								'#3c4072',
 								'#222a82',
@@ -564,7 +581,7 @@
 							};
 
 							// use configuration item and data specified to show chart
-							chart1.setOption(option);
+							chart1.setOption(chart1Options);
 						</script>
 					</div>
 				</li>
@@ -578,7 +595,7 @@
 							chart2 = echarts.init(document.getElementById('lostSales'));
 
 							// specify chart configuration item and data
-							var option = {
+							var chart2Options = {
 									color: ['#131955',
 									'#3c4072',
 									'#222a82',
@@ -618,7 +635,7 @@
 									};
 
 							// use configuration item and data specified to show chart
-							chart2.setOption(option);
+							chart2.setOption(chart2Options);
 						</script>
 					</div>
 				</li>
@@ -635,7 +652,7 @@
 							chart3 = echarts.init(document.getElementById('salesStore'));
 
 							// specify chart configuration item and data
-							var option = {
+							var chart3Options = {
 								color: ['#131955',
 								'#3c4072',
 								'#222a82',
@@ -679,7 +696,7 @@
 								};
 
 							// use configuration item and data specified to show chart
-							chart3.setOption(option);
+							chart3.setOption(chart3Options);
 						</script>
 					</div>
 				</li>
@@ -693,7 +710,7 @@
 							chart4 = echarts.init(document.getElementById('lostSales%'));
 
 							// specify chart configuration item and data
-							option = {
+							chart4Options = {
 									color: ['#131955',
 									'#3c4072',
 									'#222a82',
@@ -741,7 +758,7 @@
 							};
 
 							// use configuration item and data specified to show chart
-							chart4.setOption(option);
+							chart4.setOption(chart4Options);
 						</script>
 					</div>
 				</li>
@@ -755,7 +772,7 @@
 							chart5 = echarts.init(document.getElementById('OOS'));
 
 							// specify chart configuration item and data
-							option = {
+							chart5Options = {
 									color: ['#131955',
 									'#3c4072',
 									'#222a82',
@@ -803,7 +820,7 @@
 								};
 
 							// use configuration item and data specified to show chart
-							chart5.setOption(option);
+							chart5.setOption(chart5Options);
 						</script>
 					</div>
 				</li>
