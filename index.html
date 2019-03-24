@@ -27,6 +27,7 @@
 	<body>
 		<script>
 			$(window).load(function() {
+				initializeCharts();
 				globalFilterWidth = $(".filterDropDownColumn").width();
 				createFilters(globalFilterWidth);
 				toggleAlternateFilter();
@@ -45,6 +46,11 @@
 		<div id="d2">
 			<h1>Get Data From Server</h1>
 			<button type="button" onclick="getData()">Get Data Test</button>
+		</div>
+
+		<div id="d2">
+			<h1>Update filters</h1>
+			<button type="button" onclick="testUpdateFilters()">update filters test</button>
 		</div>
 
 		<div class="headingBackground">

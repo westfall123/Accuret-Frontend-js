@@ -230,6 +230,20 @@ function toggleAlternateFilter() {
     }
 }
 
+function testUpdateFilters() {
+    console.log($('#dropdown1_1').ejDropDownList());
+    $('#dropdown1_1').ejDropDownList().dataSource = [{
+        text: "Store 1",
+        value: "item1"
+    }, {
+        text: "Store 2",
+        value: "item2"
+    }, {
+        text: "Store 3",
+        value: "item3"
+    }];
+}
+
 function filter(value, filterType) {
     if (filterType === "store") {
         console.log("here in store");
